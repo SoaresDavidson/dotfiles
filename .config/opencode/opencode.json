@@ -1,0 +1,75 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+   "permission": {
+    "bash": {
+      "*": "ask",
+
+      "uv run pytest": "allow",
+      "uv run pytest *": "allow",
+      "uv run ruff": "allow",
+      "uv run ruff *": "allow",
+
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git status": "allow",
+      "git status *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+
+      "npm run": "allow",
+      "npm run *": "allow"
+    }
+  },
+  "mcp": {
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "stitch": {
+      "type": "remote",
+      "url": "https://stitch.googleapis.com/mcp",
+      "oauth": false,
+      "enabled":true, 
+      "headers": {
+        "X-Goog-Api-Key": "{env:GOOGLE_STITCH_API_KEY}"
+      }
+    },
+    "open-design": {
+      "type": "local",
+      "command": [
+        "docker",
+        "exec",
+        "-i",
+        "open-design",
+        "node",
+        "/app/apps/daemon/dist/cli.js",
+        "mcp",
+        "--daemon-url",
+        "http://127.0.0.1:7456"
+      ],
+      "environment": {
+        "OD_DATA_DIR": "/app/.od"
+      },
+      "enabled": true
+    }
+  },
+
+  "plugin": [
+    "./plugins/caveman/plugin.js"
+  ],
+  "lsp": {
+    "typescript": {
+      "command": ["typescript-language-server", "--stdio"],
+      "extensions": [".ts", ".tsx", ".js", ".jsx"]
+    },
+    "basedpyright": {
+      "command": ["/home/davi/.local/bin/basedpyright-langserver", "--stdio"],
+      "extensions": [".py"]
+    }
+  }
+}
