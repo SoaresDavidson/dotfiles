@@ -30,10 +30,5 @@ hl.window_rule({
     workspace = 1,
 })
 
-hl.window_rule({
-    name = "whatsapp-workspace",
-    match = { title = "(?i).*whatsapp.*" },
-    workspace = 3,
-})
 
 

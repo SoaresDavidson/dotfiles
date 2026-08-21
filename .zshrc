@@ -117,3 +117,14 @@ export STARSHIP_CONFIG=~"$HOME/.config/starship.toml"
 export PATH=/home/davi/.opencode/bin:$PATH
 export LANG=pt_BR.UTF-8
 export LC_ALL=pt_BR.UTF-8
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

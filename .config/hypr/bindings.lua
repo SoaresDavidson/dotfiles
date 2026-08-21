@@ -15,7 +15,7 @@ end)
 
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(programs.file_manager))
 hl.bind(main_mod .. " + SHIFT +  V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(main_mod .. " + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
+hl.bind(main_mod .. " + V", hl.dsp.exec_cmd("cliphist list | walker --dmenu | cliphist decode | wl-copy"))
 hl.bind(main_mod .. " + R", hl.dsp.exec_cmd(programs.menu))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
@@ -27,8 +27,13 @@ hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(main_mod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(main_mod .. " + down", hl.dsp.focus({ direction = "down" }))
 
-hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.move({ monitor = "+1" }))
-hl.bind(main_mod .. " + SHIFT + left", hl.dsp.window.move({ monitor = "-1" }))
+hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(main_mod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
+hl.bind(main_mod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
+hl.bind(main_mod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
+
+hl.bind(main_mod .. " + CTRL + right", hl.dsp.window.move({ workspace = "+1" }))
+hl.bind(main_mod .. " + CTRL + left", hl.dsp.window.move({ workspace = "-1" }))
 
 for i = 1, 10 do
     local key = i % 10
