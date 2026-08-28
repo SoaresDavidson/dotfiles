@@ -5,16 +5,23 @@ hl.bind(main_mod .. " + T", hl.dsp.exec_cmd(programs.terminal))
 hl.bind(main_mod .. " + W", hl.dsp.window.close())
 hl.bind(
 	main_mod .. " + M",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+	hl.dsp.exec_cmd(
+		"pkill -x hyprshutdown || (command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()')"
+	)
 )
-hl.bind("print", hl.plugin.hyprcapture.open)
-hl.bind("SUPER + SHIFT + w", function()
-	hl.plugin.hyprcapture.open("window")
-end)
+hl.bind(
+	"print",
+	hl.dsp.exec_cmd("pkill -INT -x hyprcapture-ui || hyprctl eval \"hl.plugin.hyprcapture.open()\"")
+)
+hl.bind(
+	"SUPER + SHIFT + w",
+	hl.dsp.exec_cmd("pkill -INT -x hyprcapture-ui || hyprctl eval \"hl.plugin.hyprcapture.open('window')\"")
+)
 
-hl.bind("SUPER + SHIFT + f", function()
-	hl.plugin.hyprcapture.open("fullscreen")
-end)
+hl.bind(
+	"SUPER + SHIFT + f",
+	hl.dsp.exec_cmd("pkill -INT -x hyprcapture-ui || hyprctl eval \"hl.plugin.hyprcapture.open('fullscreen')\"")
+)
 
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(programs.file_manager))
 hl.bind(main_mod .. " + SHIFT +  V", hl.dsp.window.float({ action = "toggle" }))
@@ -22,7 +29,7 @@ hl.bind(main_mod .. " + V", hl.dsp.exec_cmd("cliphist list | walker --dmenu | cl
 hl.bind(main_mod .. " + space", hl.dsp.exec_cmd(programs.menu))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
-hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd("wlogout"))
+hl.bind(main_mod .. " + ESCAPE", hl.dsp.exec_cmd("pkill -x wlogout || wlogout"))
 hl.bind(main_mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(main_mod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.config/hypr/scripts/wallpaper-picker.sh"))
 

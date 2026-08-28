@@ -1,7 +1,7 @@
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpm reload -n")
 	hl.exec_cmd("sh -c 'while true; do waybar; sleep 1; done'")
-	hl.exec_cmd("swaync")
+	hl.exec_cmd("mako")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("hyprsunset")

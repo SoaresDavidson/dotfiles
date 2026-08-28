@@ -52,7 +52,7 @@
     "format": "{icon}",
     "tooltip": true,
     "icon-size": 22,
-    "spacing": 25
+    "spacing": 8
   },
   "pulseaudio#source": {
     "format": "{icon} {volume}%",
@@ -105,7 +105,7 @@
       	"max-length": 25
      },
   "memory": {
-    "format": "mem: {used:0.1f}G",
+    "format": "󰍛 {percentage}%",
     "tooltip": true,
     "tooltip-format": "RAM: Used {used:0.1f}G / Free {total:0.1f}G",
     "interval": 4,
@@ -113,7 +113,7 @@
   "disk": {
     "interval": 30,
     "unit": "GB",
-    "format": "disk: {specific_used:0.2f}G",
+    "format": "󰋊 {percentage_used}%",
     "path": "/",
     "tooltip": true,
     "tooltip-format": "Root: Used {specific_used:0.2f}G / free {specific_free:0.2f}G",
@@ -165,6 +165,6 @@
     "format": "⏻",
     "tooltip": true,
     "tooltip-format": "Power menu",
-    "on-click": "wlogout"
+    "on-click": "pkill -x wlogout || wlogout"
   }
 }
