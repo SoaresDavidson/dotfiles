@@ -68,10 +68,12 @@ menu menuitem:hover {
 #workspaces,
 #clock,
 #pulseaudio,
+#backlight,
 #battery,
 #network,
 #cpu,
 #memory,
+#power-profiles-daemon,
 #tray {
     color: @text;
     padding: 4px 12px;
@@ -125,6 +127,12 @@ menu menuitem:hover {
     color: @overlay0;
 }
 
+/* ---------- backlight ---------- */
+
+#backlight {
+    color: @yellow;
+}
+
 /* ---------- battery ---------- */
 
 #battery {
@@ -141,6 +149,12 @@ menu menuitem:hover {
 
 #battery.critical:not(.charging) {
     color: @red;
+}
+
+/* ---------- power-profiles-daemon ---------- */
+
+#power-profiles-daemon {
+    color: @yellow;
 }
 
 /* ---------- network ---------- */

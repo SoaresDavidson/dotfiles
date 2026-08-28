@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//usr/share/hypr/**)",
+      "Bash(find / -iname \"*.lua\")"
+    ]
+  }
+}
