@@ -32,3 +32,8 @@ hl.window_rule({
 
 
 
+hl.window_rule({
+    name = "shadps4-idle-inhibit",
+    match = { class = "(?i).*shadps4.*" },
+    idle_inhibit = "focus",
+})
