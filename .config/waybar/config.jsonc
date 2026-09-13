@@ -4,6 +4,7 @@
   "exclusive": true,
   "modules-left": [
     "hyprland/workspaces",
+    "wlr/taskbar"
 
   ],
   "modules-center": [
@@ -135,16 +136,11 @@
    			"days":       "<span color='#ecc6d9'><b>{}</b></span>",
    			"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
    			"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-   			"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-   		}
-   	},
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
   },
-  "custom/airpods": {
-    "exec": "airpods-tui --waybar-watch",
-    "return-type": "json",
-    "format": " {}",
-    "on-click": "kitty --class airpods-tui-float -e airpods-tui"
-  },
+
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -166,5 +162,15 @@
     "tooltip": true,
     "tooltip-format": "Power menu",
     "on-click": "pkill -x wlogout || wlogout"
-  }
+  },
+    // Configuração da Taskbar (Lista de apps abertos com ícones)
+  "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 18,
+      "icon-theme": "Papirus", // Altere para o seu tema de ícones
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+      
+  },
 }

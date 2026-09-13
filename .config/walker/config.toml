@@ -1,0 +1,28 @@
+[search]
+delay = 10
+
+theme = "default"
+
+[providers]
+default = ["desktopapplications", "calc", "runner", "websearch"]
+empty = ["desktopapplications"]
+
+[[providers.prefixes]]
+provider = "desktopapplications"
+prefix = ""
+
+[[providers.prefixes]]
+provider = "calc"
+prefix = "="
+
+[[providers.prefixes]]
+provider = "files"
+prefix = "/"
+
+[[providers.prefixes]]
+provider = "runner"
+prefix = "!"
+
+[[providers.prefixes]]
+provider = "websearch"
+prefix = "?"
