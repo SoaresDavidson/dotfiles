@@ -2,3 +2,7 @@
 /.git
 /.env
 /.claude
+.luarc.json
+.claude
+
+
