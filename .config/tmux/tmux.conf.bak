@@ -68,4 +68,4 @@ run '~/.config/tmux/plugins/tpm/tpm'
 
 # Restaura a última sessão salva pelo resurrect só quando o servidor acabou de subir
 # (1 sessão com 1 janela). Recarregar a config com prefix+r não dispara de novo.
-run-shell -b 'sleep 1; [ "$(tmux list-sessions | wc -l)" -eq 1 ] && [ "$(tmux list-windows | wc -l)" -eq 1 ] && ~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh; tmux refresh-client -S'
+run-shell -b 'sleep 1; [ "$(tmux list-sessions | wc -l)" -eq 1 ] && [ "$(tmux list-windows | wc -l)" -eq 1 ] && ~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh'

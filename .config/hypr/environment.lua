@@ -1,5 +1,0 @@
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("LIBVA_DRIVER_NAME", "iHD")
-hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
-hl.env("GTK_THEME", "Adwaita:dark")
