@@ -1,0 +1,6 @@
+partial alphanumeric_keys
+xkb_symbols "brus" {
+    include "br(abnt2)"
+    name[Group1]="Portuguese (Brazil, US keyboard fix)";
+    key <AD03> { [ e, E, bar, degree ] };
+};
