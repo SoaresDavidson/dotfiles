@@ -2,8 +2,7 @@
 
 hl.config({
 	input = {
-		kb_layout = "custom",
-		kb_variant = "brus",
+		kb_file = "~/.config/hypr/custom.xkb",
 		sensitivity = 0.25,
 		accel_profile = "flat",
 	},
