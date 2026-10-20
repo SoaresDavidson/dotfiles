@@ -15,7 +15,14 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        verible = {},
+        verible = {
+          cmd = {
+            "verible-verilog-ls",
+            "--rules_config_search", -- use the project's .rules.verible_lint
+            "--column_limit=120",
+            "--indentation_spaces=4",
+          },
+        },
       },
     },
   },
