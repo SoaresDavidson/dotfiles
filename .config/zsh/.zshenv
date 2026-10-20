@@ -33,3 +33,4 @@ export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship.toml"
 # Personal binaries/scripts
 export PATH="$HOME/.local/bin:$PATH"
 . "$HOME/.cargo/env"
+export PATH="$HOME/.luarocks/bin:$PATH"
