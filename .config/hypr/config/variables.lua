@@ -8,7 +8,8 @@ CALCULATOR = "gnome-calculator"
 
 -- Monitors
 MONITOR1 = "HDMI-A-1"
-MONITOR2 = "eDP-1"
+MONITOR2 = "desc:BOE 0x0C06"
+-- MONITOR2 = "eDP-1"
 MONITOR3 = ""
 PRIMARY_MONITOR = MONITOR1
 
