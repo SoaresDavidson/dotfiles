@@ -65,6 +65,7 @@ hl.window_rule({
 })
 hl.window_rule({ match = { class = "^(.*[Ll]auncher.*)$" }, float = true, monitor = PRIMARY_MONITOR })
 hl.window_rule({ match = { class = "^(vesktop|discord)$" }, monitor = PRIMARY_MONITOR })
+hl.window_rule({ match = { class = "^(brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default)$" }, workspace = "6 silent" }) -- WhatsApp Web (PWA)
 hl.window_rule({
 	match = { class = "^(.*[Cc]alc.*)$" },
 	float = true,

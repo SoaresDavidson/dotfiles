@@ -18,7 +18,17 @@ hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D",           hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + BACKSLASH",   hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + O",           hl.dsp.layout("togglesplit"))
+
+-- Toggle between dwindle and scrolling layouts
+local function toggleLayout()
+    if hl.get_config("general:layout") == "scrolling" then
+        hl.config({ general = { layout = "dwindle" } })
+    else
+        hl.config({ general = { layout = "scrolling" } })
+    end
+end
+hl.bind(mainMod .. " + SHIFT + O", toggleLayout)
 
 -- Change focus
 hl.bind(mainMod .. " + Left",  hl.dsp.focus({ direction = "left" }))
