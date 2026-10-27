@@ -39,6 +39,14 @@ lf() { # zsh follow lf navigation
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
+yazi() { # zsh follow yazi navigation
+    local tmp=$(mktemp -t "yazi-cwd.XXXXXX") dir
+    command yazi --cwd-file="$tmp" "$@"
+    IFS= read -r -d '' dir < "$tmp"
+    rm -f "$tmp"
+    [ -n "$dir" ] && [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+}
+alias y='yazi'
 
 # =========================================================
 # Editor
