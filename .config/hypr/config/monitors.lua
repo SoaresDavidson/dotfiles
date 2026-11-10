@@ -4,7 +4,7 @@
 hl.monitor({
 	output = MONITOR1,
 	disabled = false,
-	mode = "2560x1080@74.99Hz",
+	mode = "2560x1080@59Hz",
 	position = "0x0",
 	scale = 1,
 	cm = "srgb",
