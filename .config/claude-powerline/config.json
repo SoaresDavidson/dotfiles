@@ -1,0 +1,57 @@
+{
+  "theme": "nord",
+  "display": {
+    "style": "capsule",
+    "charset": "unicode",
+    "lines": [
+      {
+        "segments": {
+          "directory": { "enabled": true, "style": "fish" },
+          "git": { "enabled": true },
+          "model": { "enabled": true },
+          "thinking": { "enabled": true },
+          "context": { "enabled": true, "displayStyle": "blocks" },
+          "block": { "enabled": true, "displayStyle": "blocks" },
+          "weekly": { "enabled": true, "displayStyle": "blocks" },
+          "metrics": { "enabled": true, "showDuration": true }
+        }
+      }
+    ],
+    "tui": {
+      "fitContent": false,
+      "widthReserve": 8,
+      "maxWidth": 120,
+      "separator": { "column": "   " },
+      "title": { "left": "{model}  {thinking}", "right": "{dir}" },
+      "footer": { "left": "{git.head}", "right": "{activity.duration}" },
+      "segments": {
+        "context.row": { "items": ["{icon}", "contexto"], "gap": 1 },
+        "block.row": { "items": ["{icon}", "limite 5h"], "gap": 1 },
+        "weekly.row": { "items": ["{icon}", "limite semana"], "gap": 1 },
+        "weekly.reset": { "items": ["reseta em", "{time}"], "gap": 1 }
+      },
+      "breakpoints": [
+        {
+          "minWidth": 70,
+          "areas": [
+            "context.row   context.bar   context.pct   context.tokens",
+            "block.row     block.bar     block.value   block.time",
+            "weekly.row    weekly.bar    weekly.pct    weekly.reset"
+          ],
+          "columns": ["15", "1fr", "4", "16"],
+          "align": ["left", "left", "right", "right"]
+        },
+        {
+          "minWidth": 0,
+          "areas": [
+            "context.row   context.pct",
+            "block.row     block.value",
+            "weekly.row    weekly.pct"
+          ],
+          "columns": ["1fr", "4"],
+          "align": ["left", "right"]
+        }
+      ]
+    }
+  }
+}
