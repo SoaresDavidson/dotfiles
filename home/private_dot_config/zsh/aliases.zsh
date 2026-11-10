@@ -29,7 +29,7 @@ alias df='df -h'
 # =========================================================
 
 alias -- -='cd -'  # -- prevents - being parsed as a flag; cd - jumps to previous directory
-alias dot='cd "$HOME/.dotfiles"'
+alias dot='cd "$HOME/.dotfiles/home/private_dot_config"'
 lf() { # zsh follow lf navigation
     tmp=$(mktemp)
     command lf -last-dir-path="$tmp" "$@"
