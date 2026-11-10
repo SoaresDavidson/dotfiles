@@ -3,7 +3,7 @@
 hl.config({
 	input = {
 		kb_file = "~/.config/hypr/custom.xkb",
-		sensitivity = 0.25,
+		sensitivity = 0.55,
 		accel_profile = "flat",
 	},
 	-- Uncomment the section below to enable software cursors; this can help with cursor display or behavior issues
