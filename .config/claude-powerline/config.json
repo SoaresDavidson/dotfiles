@@ -1,8 +1,6 @@
 {
-  "_temas": "dark (padrão), light, nord, tokyo-night, rose-pine, gruvbox, custom (definido em colors.custom)",
   "theme": "nord",
   "display": {
-    "_estilos": "minimal (padrão, sem separadores), powerline (setas), capsule (pílulas arredondadas), tui (painel com grade, usa display.tui)",
     "style": "capsule",
     "charset": "unicode",
     "widthReserve": 8,
@@ -13,10 +11,14 @@
           "git": { "enabled": true },
           "model": { "enabled": true },
           "thinking": { "enabled": true },
-          "context": { "enabled": true, "displayStyle": "blocks" },
-          "block": { "enabled": true, "displayStyle": "blocks" },
-          "weekly": { "enabled": true, "displayStyle": "blocks" },
           "metrics": { "enabled": true, "showDuration": true }
+        }
+      },
+      {
+        "segments": {
+          "context": { "enabled": true, "displayStyle": "capped" },
+          "block": { "enabled": true, "displayStyle": "capped" },
+          "weekly": { "enabled": true, "displayStyle": "capped" }
         }
       }
     ],
