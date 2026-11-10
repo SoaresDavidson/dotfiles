@@ -3,6 +3,7 @@
   "display": {
     "style": "capsule",
     "charset": "unicode",
+    "widthReserve": 8,
     "lines": [
       {
         "segments": {
