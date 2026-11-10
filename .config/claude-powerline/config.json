@@ -1,6 +1,8 @@
 {
+  "_temas": "dark (padrão), light, nord, tokyo-night, rose-pine, gruvbox, custom (definido em colors.custom)",
   "theme": "nord",
   "display": {
+    "_estilos": "minimal (padrão, sem separadores), powerline (setas), capsule (pílulas arredondadas), tui (painel com grade, usa display.tui)",
     "style": "capsule",
     "charset": "unicode",
     "widthReserve": 8,
