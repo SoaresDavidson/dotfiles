@@ -107,3 +107,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # bun completions
 [ -s "/home/davi/.bun/_bun" ] && source "/home/davi/.bun/_bun"
+[ -d /DATA/AppData/media-stack/hermes/data ] && export HERMES_HOME=/DATA/AppData/media-stack/hermes/data
