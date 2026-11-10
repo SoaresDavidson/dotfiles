@@ -2,6 +2,7 @@
 /.git
 /.env
 /.claude
+/scripts
 .luarc.json
 .claude
 _sesh
