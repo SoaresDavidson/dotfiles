@@ -1,0 +1,131 @@
+{
+  "theme": "dark",
+  "display": {
+    "style": "minimal",
+    "charset": "unicode",
+    "widthReserve": 8,
+    "lines": [
+      {
+        "segments": {
+          "directory": {
+            "enabled": true,
+            "style": "fish"
+          },
+          "git": {
+            "enabled": true
+          },
+          "model": {
+            "enabled": true
+          },
+          "thinking": {
+            "enabled": true
+          },
+          "metrics": {
+            "enabled": true,
+            "showDuration": true
+          }
+        }
+      },
+      {
+        "segments": {
+          "context": {
+            "enabled": true,
+            "displayStyle": "capped"
+          },
+          "block": {
+            "enabled": true,
+            "displayStyle": "capped"
+          },
+          "weekly": {
+            "enabled": true,
+            "displayStyle": "capped"
+          }
+        }
+      }
+    ],
+    "tui": {
+      "fitContent": false,
+      "widthReserve": 8,
+      "maxWidth": 120,
+      "separator": {
+        "column": "   "
+      },
+      "title": {
+        "left": "{model}  {thinking}",
+        "right": "{dir}"
+      },
+      "footer": {
+        "left": "{git.head}",
+        "right": "{activity.duration}"
+      },
+      "segments": {
+        "context.row": {
+          "items": [
+            "{icon}",
+            "contexto"
+          ],
+          "gap": 1
+        },
+        "block.row": {
+          "items": [
+            "{icon}",
+            "limite 5h"
+          ],
+          "gap": 1
+        },
+        "weekly.row": {
+          "items": [
+            "{icon}",
+            "limite semana"
+          ],
+          "gap": 1
+        },
+        "weekly.reset": {
+          "items": [
+            "reseta em",
+            "{time}"
+          ],
+          "gap": 1
+        }
+      },
+      "breakpoints": [
+        {
+          "minWidth": 70,
+          "areas": [
+            "context.row   context.bar   context.pct   context.tokens",
+            "block.row     block.bar     block.value   block.time",
+            "weekly.row    weekly.bar    weekly.pct    weekly.reset"
+          ],
+          "columns": [
+            "15",
+            "1fr",
+            "4",
+            "16"
+          ],
+          "align": [
+            "left",
+            "left",
+            "right",
+            "right"
+          ]
+        },
+        {
+          "minWidth": 0,
+          "areas": [
+            "context.row   context.pct",
+            "block.row     block.value",
+            "weekly.row    weekly.pct"
+          ],
+          "columns": [
+            "1fr",
+            "4"
+          ],
+          "align": [
+            "left",
+            "right"
+          ]
+        }
+      ]
+    }
+  }
+}
