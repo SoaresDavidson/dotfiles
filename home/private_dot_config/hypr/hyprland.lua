@@ -12,3 +12,6 @@ require("config.misc")
 require("config.monitors")
 require("config.windowrules")
 require("config.workspaces")
+
+-- tesla (install.sh)
+require("config.tesla")

@@ -145,31 +145,6 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(noctCall .. "panel-toggle wal
 -- Clipboard
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(noctCall .. "panel-toggle clipboard"))
 
--- Tarefa por voz no Quadro do Obsidian (voxtype + quadro-voz).
--- O atalho começa a gravar e entra no submap "voz": Enter (ou o mesmo atalho) para e
--- transcreve, Esc cancela. Fora da gravação o Enter funciona normalmente.
-local function gravarTarefa(perfil)
-    return function()
-        hl.exec_cmd("voxtype record start --profile " .. perfil)
-        hl.dispatch(hl.dsp.submap("voz"))
-    end
-end
-local function sairDaVoz(acao)
-    return function()
-        hl.exec_cmd("voxtype record " .. acao)
-        hl.dispatch(hl.dsp.submap("reset"))
-    end
-end
-hl.bind(mainMod .. " + SHIFT + T", gravarTarefa("quadro"))
-hl.bind(mainMod .. " + SHIFT + Y", gravarTarefa("quadro-llm"))
-hl.define_submap("voz", function()
-    hl.bind("Return",                  sairDaVoz("stop"))
-    hl.bind("KP_Enter",                sairDaVoz("stop"))
-    hl.bind(mainMod .. " + SHIFT + T", sairDaVoz("stop"))
-    hl.bind(mainMod .. " + SHIFT + Y", sairDaVoz("stop"))
-    hl.bind("Escape",                  sairDaVoz("cancel"))
-end)
-
 -- Notifications
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center notifications"))
 

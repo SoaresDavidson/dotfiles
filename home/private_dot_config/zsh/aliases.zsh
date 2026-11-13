@@ -1,3 +1,6 @@
+source "$ZDOTDIR/aliases/git_aliases.zsh"
+source "$ZDOTDIR/aliases/ssh_aliases.zsh"
+alias cz="chezmoi $@"
 # Better ls
 alias ls='eza --icons'
 
@@ -55,14 +58,5 @@ alias y='yazi'
 alias vim='nvim'
 alias v='nvim'
 
-# =========================================================
-# Git
-# =========================================================
-
-alias glog='PAGER="less -F -X" git log'                              # -F quit if one screen, -X no clear on exit
-alias gadog='PAGER="less -F -X" git log --all --decorate --oneline --graph'
-# alias dotgit='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-# =========================================================
-# Video
-# =========================================================
 alias brave=brave --ozone-platform=wayland
+

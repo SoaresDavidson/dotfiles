@@ -1,2 +1,7 @@
 sourceDir = {{ .chezmoi.homeDir | printf "%s/.dotfiles" | quote }}
 mode = "symlink"
+encryption = "age"
+
+[age]
+    identity = {{ .chezmoi.homeDir | printf "%s/.config/chezmoi/key.txt" | quote }}
+    recipient =  "age17ka0atlftaz76vsu3pxlw573ajsvm9h6x7zh6eg59r26hd7mwgqslu4246"

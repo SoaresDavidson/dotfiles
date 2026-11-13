@@ -1,7 +1,7 @@
 # ~/.config/zsh/.zshenv
-if [[ -f "$HOME/.dotfiles/.env" ]]; then
+if [[ -f "$ZDOTDIR/secrets.env" ]]; then
   set -a
-  source "$HOME/.dotfiles/.env"
+  source "$ZDOTDIR/secrets.env"
   set +a
 fi
 # ---------- XDG base directories ----------
