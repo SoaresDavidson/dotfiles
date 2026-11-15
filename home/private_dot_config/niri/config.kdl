@@ -73,6 +73,9 @@ spawn-at-startup "brave"
 spawn-sh-at-startup "sleep 3 && brave --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm"
 spawn-at-startup "xhost" "+SI:localuser:root"
 
+// Sem barra de título desenhada pelo app (kitty, GTK). O Hyprland faz isso por padrão.
+prefer-no-csd
+
 hotkey-overlay {
     skip-at-startup
 }
