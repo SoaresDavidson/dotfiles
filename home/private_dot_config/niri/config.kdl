@@ -85,27 +85,18 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // ---------- Window rules ----------
 // Regra que vem depois vence quando duas casam.
 
-// Aparência geral: cantos 10, blur atrás de janela transparente,
-// opacidade 0.95 ativa / 0.85 inativa (igual ao Hyprland).
+// Aparência geral: cantos 10.
+// Blur e opacidade só no kitty. Blur + opacidade em todas as janelas
+// pesava demais (o HDMI está na NVIDIA e o niri renderiza na Intel).
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
-    opacity 0.95
+}
+window-rule {
+    match app-id="^kitty$"
     background-effect {
         blur true
     }
-}
-window-rule {
-    match is-active=false
-    opacity 0.85
-}
-
-// Opacidade 1.0: terminais controlam a própria (kitty background_opacity), browsers de vídeo e players.
-window-rule {
-    match app-id=r#"^(kitty|ghostty|[Kk]onsole|Alacritty|gnome-terminal|xfce[0-9]?-terminal)$"#
-    match app-id=r#"^(firefox|zen)$"#
-    match app-id=r#"^(mpv|org\.kde\.haruna|.*plex.*|org\.kde\.gwenview|.*vlc.*)$"#
-    opacity 1.0
 }
 
 // Brave no workspace 1, WhatsApp no 6
