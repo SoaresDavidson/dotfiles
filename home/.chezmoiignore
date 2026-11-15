@@ -4,6 +4,7 @@
 {{ if not (has .chezmoi.osRelease.id (list "arch" "cachyos")) }}
 # Desktop (Hyprland) só nas máquinas Arch; servidores recebem zsh, nvim, tmux, yazi, starship
 .config/hypr
+.config/niri
 .config/waybar
 .config/kitty
 .config/mako

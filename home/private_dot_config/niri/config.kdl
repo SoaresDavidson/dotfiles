@@ -1,0 +1,319 @@
+// niri config portado do Hyprland (~/.config/hypr).
+// Original do niri salvo em config.kdl.bak-default.
+// Shell: DMS (dms.service sobe junto com niri.service). Waybar removido.
+// Arquivos em dms/ são gerados pelo DMS e incluídos no fim, então as
+// mudanças feitas na GUI do DMS (cores, gaps, monitores) prevalecem.
+
+// DMS input/layout primeiro: os valores do Hyprland abaixo vencem.
+include "dms/input.kdl"
+include "dms/layout.kdl"
+
+input {
+    keyboard {
+        xkb {
+            // mesmo keymap do Hyprland (br-abnt2 customizado)
+            file "~/.config/hypr/custom.xkb"
+        }
+        numlock
+    }
+    touchpad {
+        tap
+        natural-scroll
+        dwt
+    }
+    mouse {
+        accel-profile "flat"
+        accel-speed 0.55
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+cursor {
+    xcursor-size 24
+}
+
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    LIBVA_DRIVER_NAME "iHD"
+    GTK_THEME "Adwaita:dark"
+}
+
+// Workspaces fixos como no Hyprland: 1-5 no HDMI, 6-10 no notebook.
+// Super+N vai para o workspace pelo nome, em qualquer monitor.
+workspace "1" { open-on-output "HDMI-A-1"; }
+workspace "2" { open-on-output "HDMI-A-1"; }
+workspace "3" { open-on-output "HDMI-A-1"; }
+workspace "4" { open-on-output "HDMI-A-1"; }
+workspace "5" { open-on-output "HDMI-A-1"; }
+workspace "6" { open-on-output "eDP-1"; }
+workspace "7" { open-on-output "eDP-1"; }
+workspace "8" { open-on-output "eDP-1"; }
+workspace "9" { open-on-output "eDP-1"; }
+workspace "10" { open-on-output "eDP-1"; }
+
+layout {
+    gaps 8
+    center-focused-column "never"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        off
+    }
+    border {
+        width 2
+    }
+}
+
+spawn-at-startup "brave"
+// PWA do WhatsApp Web
+spawn-sh-at-startup "sleep 3 && brave --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm"
+spawn-at-startup "xhost" "+SI:localuser:root"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// ---------- Window rules ----------
+// Regra que vem depois vence quando duas casam.
+
+// Aparência geral: cantos 10, blur atrás de janela transparente,
+// opacidade 0.95 ativa / 0.85 inativa (igual ao Hyprland).
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+    opacity 0.95
+    background-effect {
+        blur true
+    }
+}
+window-rule {
+    match is-active=false
+    opacity 0.85
+}
+
+// Opacidade 1.0: terminais controlam a própria (kitty background_opacity), browsers de vídeo e players.
+window-rule {
+    match app-id=r#"^(kitty|ghostty|[Kk]onsole|Alacritty|gnome-terminal|xfce[0-9]?-terminal)$"#
+    match app-id=r#"^(firefox|zen)$"#
+    match app-id=r#"^(mpv|org\.kde\.haruna|.*plex.*|org\.kde\.gwenview|.*vlc.*)$"#
+    opacity 1.0
+}
+
+// Brave no workspace 1, WhatsApp no 6
+window-rule {
+    match app-id="^brave-browser$" at-startup=true
+    open-on-workspace "1"
+}
+window-rule {
+    match app-id="^brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default$"
+    open-on-workspace "6"
+}
+
+// Picture-in-Picture
+window-rule {
+    match title=r#"^([Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture)(.*)$"#
+    open-floating true
+    default-column-width { proportion 0.25; }
+    default-window-height { proportion 0.25; }
+}
+
+// Calculadora
+window-rule {
+    match app-id=r#"[Cc]alc"#
+    open-floating true
+}
+
+// Dolphin flutuante
+window-rule {
+    match app-id=r#"^org\.kde\.dolphin$"#
+    exclude title=r#"^(Moving.*|Create New.*|Extract.*|Compress.*|Copying.*|Progress.*|Configure.*|Properties.*|Choose\sApplication.*)$"#
+    open-floating true
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.55; }
+}
+
+// Utilitários e diálogos flutuantes
+window-rule {
+    match app-id=r#"^(kvantummanager|qt[56]ct|nwg-look)$"#
+    match app-id=r#"^(org\.pulseaudio\.pavucontrol|blueman-manager|nm-applet|nm-connection-editor)$"#
+    match app-id=r#"^org\.kde\.keditfiletype$"#
+    match app-id=r#"^[Xx]dg-desktop-portal-gtk$"#
+    match app-id=r#"dialog"#
+    match title=r#"^(Winetricks.*|Protontricks.*)$"#
+    match title=r#"^(Open|Authentication Required|Add Folder to Workspace|Choose Files|Save As|Confirm to replace files|File Operation Progress)$"#
+    match title=r#"^(File Upload|Choose wallpaper|Library)"#
+    match title=r#"dialog"#
+    match app-id="^steam$" title="^Friends List$"
+    open-floating true
+}
+
+// ---------- Atalhos ----------
+// Portados de ~/.config/hypr/config/binds.lua e tesla.lua.
+// Super+Shift+/ mostra a lista completa.
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Janelas
+    Mod+Q repeat=false { close-window; }
+    Mod+Alt+Space { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+D { maximize-column; }
+    Mod+F { fullscreen-window; }
+    Mod+O repeat=false { toggle-overview; }
+    Mod+Shift+O { toggle-column-tabbed-display; }
+
+    // Foco (atravessa monitor/workspace na borda, como no Hyprland)
+    Mod+Left  { focus-column-or-monitor-left; }
+    Mod+Right { focus-column-or-monitor-right; }
+    Mod+Up    { focus-window-or-workspace-up; }
+    Mod+Down  { focus-window-or-workspace-down; }
+    Mod+H     { focus-column-or-monitor-left; }
+    Mod+L     { focus-column-or-monitor-right; }
+    Mod+K     { focus-window-or-workspace-up; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+Home  { focus-column-first; }
+    Mod+End   { focus-column-last; }
+
+    // Mover janela
+    Mod+Shift+Left  { move-column-left-or-to-monitor-left; }
+    Mod+Shift+Right { move-column-right-or-to-monitor-right; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+H     { move-column-left-or-to-monitor-left; }
+    Mod+Shift+L     { move-column-right-or-to-monitor-right; }
+    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+WheelScrollUp   { move-column-to-monitor-left; }
+    Mod+Shift+WheelScrollDown { move-column-to-monitor-right; }
+    Mod+Ctrl+Shift+Right { move-window-to-workspace-down; }
+    Mod+Ctrl+Shift+Left  { move-window-to-workspace-up; }
+    Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-window-to-workspace-up; }
+    Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-window-to-workspace-down; }
+
+    // Agrupar janelas na mesma coluna
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Comma        { consume-window-into-column; }
+
+    // Tamanho
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-column-width-back; }
+    Mod+Ctrl+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+    Mod+M { maximize-window-to-edges; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // Workspaces por nome (1-5 HDMI, 6-10 notebook)
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "9"; }
+    Mod+0 { focus-workspace "10"; }
+    Mod+Shift+1 { move-window-to-workspace "1"; }
+    Mod+Shift+2 { move-window-to-workspace "2"; }
+    Mod+Shift+3 { move-window-to-workspace "3"; }
+    Mod+Shift+4 { move-window-to-workspace "4"; }
+    Mod+Shift+5 { move-window-to-workspace "5"; }
+    Mod+Shift+6 { move-window-to-workspace "6"; }
+    Mod+Shift+7 { move-window-to-workspace "7"; }
+    Mod+Shift+8 { move-window-to-workspace "8"; }
+    Mod+Shift+9 { move-window-to-workspace "9"; }
+    Mod+Shift+0 { move-window-to-workspace "10"; }
+
+    // Workspaces relativos ao monitor atual (1-3)
+    Mod+Ctrl+1 { focus-workspace 1; }
+    Mod+Ctrl+2 { focus-workspace 2; }
+    Mod+Ctrl+3 { focus-workspace 3; }
+    Mod+Ctrl+Shift+1 { move-window-to-workspace 1; }
+    Mod+Ctrl+Shift+2 { move-window-to-workspace 2; }
+    Mod+Ctrl+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+Alt+1 { move-window-to-workspace 1 focus=false; }
+    Mod+Shift+Alt+2 { move-window-to-workspace 2 focus=false; }
+    Mod+Shift+Alt+3 { move-window-to-workspace 3 focus=false; }
+
+    Mod+Ctrl+Right { focus-workspace-down; }
+    Mod+Ctrl+Left  { focus-workspace-up; }
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-up; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+
+    // Scratchpad (DMS)
+    Mod+Shift+S { spawn "dms" "ipc" "call" "scratchpad" "move" "scratch"; }
+    Mod+S       { spawn "dms" "ipc" "call" "scratchpad" "toggle" "scratch"; }
+
+    // Apps
+    Mod+Return { spawn "kitty"; }
+    Mod+E { spawn "dolphin"; }
+    Mod+T { spawn "code"; }
+    Mod+C { spawn "gnome-calculator"; }
+    XF86Calculator { spawn "gnome-calculator"; }
+    Mod+W { spawn "brave"; }
+    Ctrl+Shift+Escape { spawn "kitty" "-e" "btop"; }
+
+    // DMS
+    Mod+Space repeat=false { spawn "dms" "ipc" "call" "launcher" "toggle"; }
+    Mod+Z     { spawn "dms" "ipc" "call" "settings" "toggle"; }
+    Mod+X     { spawn "dms" "ipc" "call" "control-center" "toggle"; }
+    Mod+A     { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Mod+V     { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+Shift+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
+    Mod+P     { spawn "dms" "ipc" "call" "color-picker" "toggle"; }
+    Mod+Alt+L { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+Alt+C { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+
+    // Áudio, mídia, brilho
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
+    XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "dms" "ipc" "call" "mic" "mute"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "playPause"; }
+    XF86AudioPause       allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "playPause"; }
+    XF86AudioNext        allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "next"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "previous"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+
+    // Screenshot (nativo do niri)
+    Print { screenshot; }
+    Mod+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // tesla: tarefa por voz. Mesmo atalho inicia e para a gravação.
+    // niri não tem submap, então Enter/Esc durante a gravação viraram:
+    // repetir o atalho para parar, Super+Shift+BackSpace para cancelar.
+    Mod+Shift+T { spawn-sh "[ \"$(voxtype status)\" = recording ] && voxtype record stop || voxtype record start --profile tesla"; }
+    Mod+Shift+Y { spawn-sh "[ \"$(voxtype status)\" = recording ] && voxtype record stop || voxtype record start --profile tesla-llm"; }
+    Mod+Shift+BackSpace { spawn "voxtype" "record" "cancel"; }
+
+    // Sistema
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+E { quit; }
+    Ctrl+Alt+Delete { quit; }
+    Mod+Shift+P { power-off-monitors; }
+}
+
+// ---------- DMS (gerado, não editar) ----------
+include "dms/colors.kdl"
+include "dms/outputs.kdl"
+include "dms/cursor.kdl"
+include "dms/alttab.kdl"
+include "dms/windowrules.kdl"
+include "dms/wpblur.kdl"
+include "dms/binds.kdl"
