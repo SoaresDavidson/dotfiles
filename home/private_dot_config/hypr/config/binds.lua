@@ -16,7 +16,35 @@ end
 hl.bind(mainMod .. " + Escape",      hl.dsp.exec_cmd("hyprctl kill"))
 hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + D",           hl.dsp.window.fullscreen({ mode = 1 }))
+-- Maximizar coluna como no niri: a janela ocupa a largura toda, mas continua
+-- na fileira do layout scrolling, então H/L e as setas seguem navegando.
+-- (fullscreen mode 1 escondia os vizinhos e o foco pulava para o outro monitor.)
+local savedWidth = {}
+local function snapWidth(frac)
+    local best = 0.5
+    for _, p in ipairs({ 0.333, 0.5, 0.667 }) do
+        if math.abs(frac - p) < math.abs(frac - best) then best = p end
+    end
+    return best
+end
+local function toggleMaximizeColumn()
+    local w = hl.get_active_window()
+    if not w then return end
+    if w.floating or hl.get_config("general:layout") ~= "scrolling" then
+        hl.dispatch(hl.dsp.window.fullscreen({ mode = 1 }))
+        return
+    end
+    local m = w.monitor or hl.get_active_monitor()
+    local frac = w.size.x / (m.width / m.scale)
+    if frac > 0.9 then
+        hl.dispatch(hl.dsp.layout("colresize " .. (savedWidth[w.address] or 0.5)))
+        savedWidth[w.address] = nil
+    else
+        savedWidth[w.address] = snapWidth(frac)
+        hl.dispatch(hl.dsp.layout("colresize 1.0"))
+    end
+end
+hl.bind(mainMod .. " + D",           toggleMaximizeColumn)
 hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + O",           hl.dsp.layout("togglesplit"))
 
@@ -33,12 +61,32 @@ hl.bind(mainMod .. " + SHIFT + O", toggleLayout)
 -- Change focus
 hl.bind(mainMod .. " + Left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + Right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + Up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + Down",  hl.dsp.focus({ direction = "down" }))
+-- Cima/baixo como no niri: foca a janela acima/abaixo na coluna; se não houver,
+-- vai para o workspace anterior/seguinte do monitor (animação vertical).
+local function focusOrWorkspace(dir, ws)
+    return function()
+        local before = hl.get_active_window()
+        if before then
+            hl.dispatch(hl.dsp.focus({ direction = dir }))
+            local after = hl.get_active_window()
+            -- só conta se a nova janela está na mesma coluna; no scrolling,
+            -- sem vizinho acima/abaixo o foco cai numa coluna ao lado.
+            if after and after.address ~= before.address
+                and after.workspace and before.workspace
+                and after.workspace.id == before.workspace.id
+                and math.abs(after.at.x - before.at.x) < 5 then
+                return
+            end
+        end
+        hl.dispatch(hl.dsp.focus({ workspace = ws }))
+    end
+end
+hl.bind(mainMod .. " + Up",    focusOrWorkspace("up", "m-1"))
+hl.bind(mainMod .. " + Down",  focusOrWorkspace("down", "m+1"))
 hl.bind(mainMod .. " + H",     hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L",     hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K",     hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J",     hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + K",     focusOrWorkspace("up", "m-1"))
+hl.bind(mainMod .. " + J",     focusOrWorkspace("down", "m+1"))
 hl.bind("ALT + Tab",           hl.dsp.window.cycle_next())
 hl.bind(mainMod .. " + Tab",   hl.dsp.exec_cmd(noctCall .. "window-switcher"))
 
