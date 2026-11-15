@@ -303,6 +303,13 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 }
 
+// Renderiza na NVIDIA: o HDMI (monitor principal) está ligado nela, então
+// evita a cópia Intel -> NVIDIA a cada quadro. Custo: dGPU sempre ligada.
+// Para voltar à Intel, apague este bloco e relogue.
+debug {
+    render-drm-device "/dev/dri/by-path/pci-0000:01:00.0-render"
+}
+
 // ---------- DMS (gerado, não editar) ----------
 include "dms/colors.kdl"
 include "dms/outputs.kdl"
