@@ -6,4 +6,4 @@ alias glog='PAGER="less -F -X" git log'                              # -F quit i
 alias gadog='PAGER="less -F -X" git log --all --decorate --oneline --graph'
 alias gpp="git push"
 alias gsm="git switch main"
-
+alias gd="git diff"

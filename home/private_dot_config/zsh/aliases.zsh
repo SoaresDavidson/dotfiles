@@ -1,5 +1,6 @@
 source "$ZDOTDIR/aliases/git_aliases.zsh"
 source "$ZDOTDIR/aliases/ssh_aliases.zsh"
+source "$ZDOTDIR/aliases/docker_aliases.zsh"
 alias cz="chezmoi $@"
 # Better ls
 alias ls='eza --icons'
