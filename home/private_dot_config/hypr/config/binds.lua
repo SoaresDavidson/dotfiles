@@ -58,6 +58,16 @@ local function toggleLayout()
 end
 hl.bind(mainMod .. " + SHIFT + O", toggleLayout)
 
+-- Liga/desliga foco seguindo o mouse. Desligado (0), passar o cursor por cima
+-- não troca o foco nem rola o layout scrolling; clicar ainda foca.
+local function toggleFollowMouse()
+    local on = hl.get_config("input:follow_mouse") ~= 0
+    hl.config({ input = { follow_mouse = on and 0 or 1 } })
+    hl.dispatch(hl.dsp.exec_cmd("notify-send -t 1500 Hyprland 'Foco pelo mouse: "
+        .. (on and "desligado" or "ligado") .. "'"))
+end
+hl.bind(mainMod .. " + M", toggleFollowMouse)
+
 -- Change focus
 hl.bind(mainMod .. " + Left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + Right", hl.dsp.focus({ direction = "right" }))
