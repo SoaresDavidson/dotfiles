@@ -14,4 +14,6 @@
 .config/brave-flags.conf
 .config/claude-powerline
 .config/opencode
+# Segredos ficam só nas máquinas pessoais
+.config/zsh/secrets.env
 {{ end }}
