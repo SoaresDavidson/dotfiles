@@ -2,7 +2,7 @@
 **/*.bak-*
 
 {{ if not (has .chezmoi.osRelease.id (list "arch" "cachyos")) }}
-# Desktop (Hyprland) só nas máquinas Arch; servidores recebem zsh, nvim, tmux, yazi, starship
+# Desktop (Hyprland) só nas máquinas Arch; servidores recebem zsh, tmux, yazi, starship
 .config/hypr
 .config/niri
 .config/waybar
@@ -16,4 +16,6 @@
 .config/opencode
 # Segredos ficam só nas máquinas pessoais
 .config/zsh/secrets.env
+# LazyVim só nas máquinas pessoais
+.config/nvim
 {{ end }}
